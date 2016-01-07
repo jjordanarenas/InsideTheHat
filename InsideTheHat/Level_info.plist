@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>numWaves</key>
+	<integer>20</integer>
+	<key>wave - 1</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>correct</string>
+		<key>centerDoor</key>
+		<string>wrong</string>
+		<key>rightDoor</key>
+		<string>correct</string>
+	</dict>
+	<key>wave - 2</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>wrong</string>
+		<key>centerDoor</key>
+		<string>wrong</string>
+		<key>rightDoor</key>
+		<string>correct</string>
+	</dict>
+	<key>wave - 3</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>correct</string>
+		<key>centerDoor</key>
+		<string>correct</string>
+		<key>rightDoor</key>
+		<string>correct</string>
+	</dict>
+	<key>wave - 4</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>correct</string>
+		<key>centerDoor</key>
+		<string>wrong</string>
+		<key>rightDoor</key>
+		<string>wrong</string>
+	</dict>
+	<key>wave - 5</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>correct</string>
+		<key>centerDoor</key>
+		<string>correct</string>
+		<key>rightDoor</key>
+		<string>correct</string>
+	</dict>
+	<key>wave - 6</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>wrong</string>
+		<key>centerDoor</key>
+		<string>correct</string>
+		<key>rightDoor</key>
+		<string>correct</string>
+	</dict>
+	<key>wave - 7</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>correct</string>
+		<key>centerDoor</key>
+		<string>correct</string>
+		<key>rightDoor</key>
+		<string>wrong</string>
+	</dict>
+	<key>wave - 8</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>wrong</string>
+		<key>centerDoor</key>
+		<string>wrong</string>
+		<key>rightDoor</key>
+		<string>correct</string>
+	</dict>
+	<key>wave - 9</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>correct</string>
+		<key>centerDoor</key>
+		<string>wrong</string>
+		<key>rightDoor</key>
+		<string>wrong</string>
+	</dict>
+	<key>wave - 10</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>correct</string>
+		<key>centerDoor</key>
+		<string>correct</string>
+		<key>rightDoor</key>
+		<string>correct</string>
+	</dict>
+	<key>wave - 11</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>wrong</string>
+		<key>centerDoor</key>
+		<string>correct</string>
+		<key>rightDoor</key>
+		<string>correct</string>
+	</dict>
+	<key>wave - 12</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>correct</string>
+		<key>centerDoor</key>
+		<string>wrong</string>
+		<key>rightDoor</key>
+		<string>wrong</string>
+	</dict>
+	<key>wave - 13</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>wrong</string>
+		<key>centerDoor</key>
+		<string>wrong</string>
+		<key>rightDoor</key>
+		<string>correct</string>
+	</dict>
+	<key>wave - 14</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>wrong</string>
+		<key>centerDoor</key>
+		<string>correct</string>
+		<key>rightDoor</key>
+		<string>correct</string>
+	</dict>
+	<key>wave - 15</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>wrong</string>
+		<key>centerDoor</key>
+		<string>correct</string>
+		<key>rightDoor</key>
+		<string>correct</string>
+	</dict>
+	<key>wave - 16</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>correct</string>
+		<key>centerDoor</key>
+		<string>correct</string>
+		<key>rightDoor</key>
+		<string>wrong</string>
+	</dict>
+	<key>wave - 17</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>correct</string>
+		<key>centerDoor</key>
+		<string>correct</string>
+		<key>rightDoor</key>
+		<string>correct</string>
+	</dict>
+	<key>wave - 18</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>wrong</string>
+		<key>centerDoor</key>
+		<string>wrong</string>
+		<key>rightDoor</key>
+		<string>correct</string>
+	</dict>
+	<key>wave - 19</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>wrong</string>
+		<key>centerDoor</key>
+		<string>wrong</string>
+		<key>rightDoor</key>
+		<string>correct</string>
+	</dict>
+	<key>wave - 20</key>
+	<dict>
+		<key>leftDoor</key>
+		<string>correct</string>
+		<key>centerDoor</key>
+		<string>wrong</string>
+		<key>rightDoor</key>
+		<string>wrong</string>
+	</dict>
+</dict>
+</plist>

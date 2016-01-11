@@ -12,6 +12,7 @@ import SpriteKit
 class MenuScene: SKScene {
     private var background: SKSpriteNode!
     private var labelInitGame: SKLabelNode!
+    var viewController: GameViewController!
     
     override func didMoveToView(view: SKView) {
         self.initializeMenu()
@@ -58,6 +59,8 @@ class MenuScene: SKScene {
         let sceneTransition = SKTransition.doorsOpenVerticalWithDuration(1.25)
         // Create next scene
         let gameScene = GameScene(size: view!.bounds.size)
+        // Linking view controller and scene to show ads
+        gameScene.viewController = self.viewController
         // Present next scene with transition
         self.view?.presentScene(gameScene, transition: sceneTransition)
     }

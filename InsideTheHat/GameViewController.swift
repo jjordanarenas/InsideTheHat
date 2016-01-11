@@ -15,6 +15,10 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
 
         let scene = MenuScene(size: view.bounds.size)
+        
+        // Linking view controller and scene to show ads
+        scene.viewController = self
+        
         // Configure the view.
         let skView = self.view as! SKView
         skView.showsFPS = true

@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Jorge Jordán. All rights reserved.
 //
 
+import GoogleMobileAds
 import SpriteKit
 import AVFoundation
 
@@ -18,7 +19,7 @@ enum TutorialSteps : UInt32 {
     case TUTORIAL_ENDED = 5
 }
 
-class GameScene: SKScene {
+class GameScene: SKScene, GADInterstitialDelegate {
     private var rabbit: SKSpriteNode!
     private var wall: SKSpriteNode!
     private var leftDoor: SKSpriteNode!
@@ -49,7 +50,7 @@ class GameScene: SKScene {
     private let kNumSmashTextures = 11
     private var redLifeBar: SKShapeNode!
     private var greenLifeBar: SKShapeNode!
-    private let kMaxNumLifePoints = 10
+    private let kMaxNumLifePoints = 3//10
     private var lifePoints: Int = 0
     private var labelGameOver: SKLabelNode!
     private var labelResetGame: SKLabelNode!
@@ -68,6 +69,10 @@ class GameScene: SKScene {
     private var leftDoorsInfo: [String]!
     private var centerDoorsInfo: [String]!
     private var rightDoorsInfo: [String]!
+    private var soundOffOnButton: UIButton!
+    private var isSoundOn: Bool = true
+    private var interstitial: GADInterstitial!
+    var viewController: GameViewController!
     
     override func didMoveToView(view: SKView) {
         self.readLevelInfo()
@@ -76,6 +81,7 @@ class GameScene: SKScene {
         if !isTutorialCompleted && tutorialStep != .TUTORIAL_ENDED {
             self.initializeTutorial()
         }
+        self.preloadInterstitial()
         self.initializeMusic()
         self.initializeMainCharacter()
         self.initializeWall()
@@ -88,6 +94,7 @@ class GameScene: SKScene {
         self.initializeAnimations()
         self.startJumpingRabbit()
         self.initializeLifeBar()
+        self.initializeSoundOffOnButton()
     }
     
     func initializeMainCharacter() {
@@ -353,6 +360,8 @@ class GameScene: SKScene {
                     self.rabbit.removeActionForKey("jumping_rabbit")
                     // Run smashing animation
                     self.startSmashingRabbit()
+                    
+                    self.showInterstitial()
                 } else {
                     // Reproduce sound
                     self.playCorrectDoorSound()
@@ -410,6 +419,13 @@ class GameScene: SKScene {
 
     func initializeWave() {
         if self.isCollisionDetected {
+            self.lifePoints--
+            self.updateLifeBar()
+            // If we have lost all the life points
+            if self.lifePoints == 0 {
+                self.gameOver()
+            }
+            
         // Revert flag's value
             self.isCollisionDetected = false
         } else {
@@ -463,13 +479,17 @@ class GameScene: SKScene {
     }
 
     func playWrongDoorSound() {
-        // Play wrong door sound
-        wrongDoorSound.play()
+        if isSoundOn {
+            // Play wrong door sound
+            wrongDoorSound.play()
+        }
     }
 
     func playCorrectDoorSound() {
-        // Play correct door sound
-        correctDoorSound.play()
+        if isSoundOn {
+            // Play correct door sound
+            correctDoorSound.play()
+        }
     }
 
     func initializeEnemy() {
@@ -507,7 +527,7 @@ class GameScene: SKScene {
     
     func initializeEnemyActions() {
         // Enemy's lateral speed
-        let enemyLateralSpeed: CGFloat = 150.0
+        let enemyLateralSpeed: CGFloat = 250.0
         
         // Initialize enemy's type
         var enemyType: EnemyType = .ENEMY_LEFT_RIGHT
@@ -532,6 +552,8 @@ class GameScene: SKScene {
                 // If we have lost all the life points
                 if self.lifePoints == 0 {
                     self.gameOver()
+                } else {
+                    self.showInterstitial()
                 }
             }
             
@@ -827,6 +849,32 @@ class GameScene: SKScene {
         let sequence = SKAction.sequence([actionMoveDown, actionMoveUp, actionMoveDown, stopMusic, showLabelResetAction, stopGame])
         // Run sequence
         labelGameOver.runAction(sequence)
+        
+        self.showInterstitial()
+    }
+    
+    func preloadInterstitial() {
+        self.interstitial = GADInterstitial(adUnitID: "ca-app-pub-5767684210972160/6577154339")
+        self.interstitial.delegate = self
+        let request = GADRequest()
+        // Requests test ads on test devices.
+        request.testDevices = [kGADSimulatorID]
+        
+        self.interstitial.loadRequest(request)
+    }
+    
+    func interstitialDidDismissScreen(ad: GADInterstitial!) {
+        // Continue game
+        self.view?.paused = false
+        self.preloadInterstitial()
+    }
+
+    func showInterstitial() {
+        if self.interstitial.isReady {
+            // Stop game
+            self.view?.paused = true
+            self.interstitial.presentFromRootViewController(viewController)
+        }
     }
     
     func showLabelReset() {
@@ -1117,6 +1165,29 @@ class GameScene: SKScene {
             leftDoorsInfo.append(waveInfo.valueForKey("leftDoor") as! String)
             centerDoorsInfo.append(waveInfo.valueForKey("centerDoor") as! String)
             rightDoorsInfo.append(waveInfo.valueForKey("rightDoor") as! String)
+        }
+    }
+    
+    func initializeSoundOffOnButton() {
+        // Initialize UIButton
+        soundOffOnButton = UIButton(frame: CGRectMake(view!.bounds.size.width - rabbit.frame.width, view!.bounds.size.height - rabbit.frame.width, rabbit.frame.width, rabbit.frame.width))
+        // Set image to button
+        soundOffOnButton.setImage(UIImage(named: "soundOffOn"), forState: UIControlState.Normal)
+        // Specify function to trigger
+        soundOffOnButton.addTarget(self, action: "alternateSound", forControlEvents: UIControlEvents.TouchUpInside)
+        // Add button to view
+        self.view!.addSubview(soundOffOnButton)
+    }
+    
+    func alternateSound() {
+        if isSoundOn {
+            // Stop background music
+            isSoundOn = false
+            backgroundMusic.stop()
+        } else {
+            // Restart background music
+            isSoundOn = true
+            backgroundMusic.play()
         }
     }
     

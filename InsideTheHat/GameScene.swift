@@ -50,7 +50,7 @@ class GameScene: SKScene, GADInterstitialDelegate {
     private let kNumSmashTextures = 11
     private var redLifeBar: SKShapeNode!
     private var greenLifeBar: SKShapeNode!
-    private let kMaxNumLifePoints = 3//10
+    private let kMaxNumLifePoints = 10
     private var lifePoints: Int = 0
     private var labelGameOver: SKLabelNode!
     private var labelResetGame: SKLabelNode!
@@ -457,8 +457,9 @@ class GameScene: SKScene, GADInterstitialDelegate {
             // Reproduce song indefinitely
             backgroundMusic.numberOfLoops = -1
             // Play music
-            backgroundMusic.play()
-
+            if isSoundOn {
+                backgroundMusic.play()
+            }
             // Preparing wrong door sound
             path = NSBundle.mainBundle().pathForResource("wrong_door", ofType:"mp3")
             fileURL = NSURL(fileURLWithPath: path!)
@@ -911,7 +912,7 @@ class GameScene: SKScene, GADInterstitialDelegate {
         self.removeAllChildren()
         // Remove all actions
         self.removeAllActions()
-        ///////////////
+        
         self.view?.paused = false
         // Restart the game
         self.view?.presentScene(self)
